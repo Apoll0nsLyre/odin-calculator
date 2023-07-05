@@ -1,0 +1,76 @@
+body{
+    margin: 0;
+    padding: 0;
+    border: 0;
+}
+button{
+    width: 50px;
+    height: 50px;
+    border: 1px solid #000;
+    background-color: #fff;
+    color: #000;
+    font-size: 30px;
+    margin: 5px;
+    cursor: pointer;
+    border-radius: 5px;
+}
+.calculator {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    width: fit-content;
+    height: fit-content;
+    padding: 20px;
+    box-sizing: border-box;
+    margin: 0 auto;
+    margin-top: 30px;
+    margin-bottom: 0;
+    border: 1px solid #000;
+    border-radius: 10px;
+    background-color: orange;
+    box-shadow:5px 5px 5px 5px #000;
+}
+.display{
+    display: flex;
+    flex-direction: row;
+}
+.value{
+    box-sizing:border-box;
+    border: solid 1px #000;
+    border-radius: 5px;
+    padding-bottom: 10px;
+    padding-top: 10px;
+    font-size: 25px;
+    text-align: right;
+    background-color: #fff;
+    width: 100%;
+    height: 50px;
+}
+.pad{
+    display: flex;
+    width: fit-content;
+    height: fit-content;
+    flex-direction: column;
+}
+.row{
+    display: flex;
+    width: fit-content;
+    height: fit-content;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+    box-sizing: border-box;
+}
+
+.delete{
+    font-size: 20px;
+    box-sizing: border-box;
+    border-radius: 5px;
+}
+
+button:hover{
+    background-color: #000;
+    color: #fff;
+}
