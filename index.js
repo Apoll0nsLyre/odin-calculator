@@ -22,7 +22,7 @@ commaBtn.addEventListener("click", () => {
     comma();
 });   
 function appendNumber(number){
-    if (reset === true){
+    if (reset === true && firstOperand === ""){
         reset = false;
         clear();
     }
@@ -52,6 +52,8 @@ function comma(){
     };
 };
 
+
+
 number.forEach((number) => {
     number.addEventListener("click", () => {
         appendNumber(number);
@@ -69,7 +71,6 @@ equalBtn.addEventListener("click", () => {
 operator.forEach((operator) => {
     operator.addEventListener("click", () => {
         setOperator(operator);
-        console.log(secondNumber);
     });
 });
 
@@ -135,5 +136,11 @@ function result(){
     else if (firstOperand === "/"){
         divide();
     }
-    reset = true;
+    if(firstOperand === ""){
+        firstNumber = value.textContent;
+        secondNumber = "";
+    }
+    console.log(firstNumber, "first");
+    console.log(secondNumber, "second");
+    console.log(firstOperand, "operand");
 };
