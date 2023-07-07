@@ -11,6 +11,7 @@ button {
     background-color: #fff;
     color: #000;
     margin: 5px;
+    margin-bottom: 10px;
     cursor: pointer;
     border-radius: 15px;
     box-shadow: 0px 4px 4px 0px #000;
@@ -29,7 +30,7 @@ button {
     box-sizing: border-box;
     margin: 0 auto;
     margin-top: 30px;
-    margin-bottom: 0;
+    margin-bottom: 15px;
     border: 1px solid #000;
     border-radius: 15px;
     background-color: rgb(81, 76, 76);
@@ -53,7 +54,8 @@ button {
     height: 50px;
     padding-right: 5px;
     color: rgb(121, 177, 121);
-    background-color: rgb(50, 47, 47)
+    background-color: rgb(50, 47, 47);
+    box-shadow: inset 2px 2px 4px  #000;
 }
 .pad{
     display: flex;
@@ -90,7 +92,15 @@ button {
 button:hover{
     box-shadow: 0px 2px 2px 0px #000;
     margin-top:10px;
-    margin-bottom: 0px;
+    margin-bottom: 5px;
     background-color: rgb(68, 68, 245);
     color: #000;
+}
+
+p{
+    font-size: 20px;
+    color: #000000;
+    margin-bottom: 10px;
+    margin-top: 10px;
+    text-align: center;
 }
