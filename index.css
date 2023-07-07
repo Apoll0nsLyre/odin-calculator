@@ -1,19 +1,23 @@
-body{
+*{
     margin: 0;
     padding: 0;
-    border: 0;
+    font-family: fantasy;
+    background-color: rgb(81, 76, 76);
 }
-button{
-    width: 50px;
-    height: 50px;
+button {
+    width: 70px;
+    height: 70px;
     border: 1px solid #000;
     background-color: #fff;
     color: #000;
-    font-size: 30px;
     margin: 5px;
     cursor: pointer;
-    border-radius: 5px;
+    border-radius: 15px;
+    box-shadow: 0px 4px 4px 0px #000;
+    font-size: 30px;
+    transition: all 0.2s;
 }
+
 .calculator {
     display: flex;
     justify-content: center;
@@ -21,15 +25,16 @@ button{
     flex-direction: column;
     width: fit-content;
     height: fit-content;
-    padding: 20px;
+    padding: 15px;
     box-sizing: border-box;
     margin: 0 auto;
     margin-top: 30px;
     margin-bottom: 0;
     border: 1px solid #000;
-    border-radius: 10px;
-    background-color: orange;
+    border-radius: 15px;
+    background-color: rgb(81, 76, 76);
     box-shadow:5px 5px 5px 5px #000;
+    font: fantasy;
 }
 .display{
     display: flex;
@@ -38,7 +43,7 @@ button{
 .value{
     box-sizing:border-box;
     border: solid 1px #000;
-    border-radius: 5px;
+    border-radius: 10px;
     padding-bottom: 10px;
     padding-top: 10px;
     font-size: 25px;
@@ -46,6 +51,9 @@ button{
     background-color: #fff;
     width: 100%;
     height: 50px;
+    padding-right: 5px;
+    color: rgb(121, 177, 121);
+    background-color: rgb(50, 47, 47)
 }
 .pad{
     display: flex;
@@ -60,17 +68,29 @@ button{
     display: flex;
     justify-content: center;
     align-items: center;
-    padding: 10px;
-    box-sizing: border-box;
 }
 
 .delete{
     font-size: 20px;
     box-sizing: border-box;
-    border-radius: 5px;
+}
+
+.operator:hover{
+    background-color: rgb(230, 109, 109);
+    color: #000;
+}
+.number:hover{
+    box-shadow: 0px 2px 2px 0px #000;
+    margin-top:10px;
+    margin-bottom: 0px;
+    background-color: #24eacc;
+    color: #000;
 }
 
 button:hover{
-    background-color: #000;
-    color: #fff;
+    box-shadow: 0px 2px 2px 0px #000;
+    margin-top:10px;
+    margin-bottom: 0px;
+    background-color: rgb(68, 68, 245);
+    color: #000;
 }

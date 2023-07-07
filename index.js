@@ -21,6 +21,28 @@ clearBtn.addEventListener("click", () => {
 commaBtn.addEventListener("click", () => {
     comma();
 });   
+
+number.forEach((number) => {
+    number.addEventListener("click", () => {
+        appendNumber(number);
+    });
+});
+
+deleteBtn.addEventListener("click", () => {
+    deleteNumber();
+});
+
+equalBtn.addEventListener("click", () => {
+    result();
+    reset = true;
+});
+
+operator.forEach((operator) => {
+    operator.addEventListener("click", () => {
+        setOperator(operator);
+    });
+});
+
 function appendNumber(number){
     if (reset === true && firstOperand === ""){
         reset = false;
@@ -51,28 +73,6 @@ function comma(){
         }
     };
 };
-
-
-
-number.forEach((number) => {
-    number.addEventListener("click", () => {
-        appendNumber(number);
-    });
-});
-
-deleteBtn.addEventListener("click", () => {
-    deleteNumber();
-});
-
-equalBtn.addEventListener("click", () => {
-    result();
-});
-
-operator.forEach((operator) => {
-    operator.addEventListener("click", () => {
-        setOperator(operator);
-    });
-});
 
 function setOperator(operator){
     value.textContent += operator.textContent;
@@ -115,13 +115,18 @@ function divide(){
     }
 };
 
+function percent(){
+    if (firstOperand === "%"){
+        value.textContent = parseInt(firstNumber) * parseInt(secondNumber) / 100;
+    }
+}
+
 function clear(){
     value.textContent = "0";
     firstNumber = 0;
     secondNumber = 0;
     firstOperand = "";
 };
-
 
 function result(){
     if (firstOperand === "+"){
@@ -135,12 +140,11 @@ function result(){
     }
     else if (firstOperand === "/"){
         divide();
+    }else if (firstOperand === "%"){
+        percent();
     }
-    if(firstOperand === ""){
-        firstNumber = value.textContent;
-        secondNumber = "";
-    }
-    console.log(firstNumber, "first");
-    console.log(secondNumber, "second");
-    console.log(firstOperand, "operand");
+    firstNumber = value.textContent;
+    secondNumber = "";
+    firstOperand = "";
 };
+
