@@ -11,8 +11,9 @@ const commaBtn = document.querySelector(".comma");
 let reset = false;
 let firstNumber = 0;
 let secondNumber = 0;
-let firstOperand = "";
-let secondOperand = "";
+let firstOperator = "";
+let secondOperator = "";
+let resultNumber = "";
 
 clearBtn.addEventListener("click", () => {
     clear();
@@ -44,7 +45,7 @@ operator.forEach((operator) => {
 });
 
 function appendNumber(number){
-    if (reset === true && firstOperand === ""){
+    if (reset === true && firstOperator === ""){
         reset = false;
         clear();
     }
@@ -52,7 +53,7 @@ function appendNumber(number){
         value.textContent = "";
     }
     value.textContent += number.textContent;
-    if (firstOperand !== ""){
+    if (firstOperator !== ""){
         secondNumber += number.textContent;
     }else{
         firstNumber += number.textContent;
@@ -66,7 +67,7 @@ function comma(){
         value.textContent = "0.";
     }else{
         value.textContent += ".";
-        if (firstOperand !== ""){
+        if (firstOperator !== ""){
             secondNumber += ".";
         }else{
             firstNumber += ".";
@@ -76,12 +77,12 @@ function comma(){
 
 function setOperator(operator){
     value.textContent += operator.textContent;
-    firstOperand = operator.textContent;
+    firstOperator = operator.textContent;
 };
 
 function deleteNumber(){
     value.textContent = value.textContent.slice(0, -1);
-    if (firstOperand !== ""){
+    if (firstOperator !== ""){
         secondNumber = secondNumber.slice(0, -1);
     }else{
         firstNumber = firstNumber.slice(0, -1);
@@ -91,60 +92,54 @@ function deleteNumber(){
 };
 
 function add(){
-    if (firstOperand === "+"){
-        value.textContent = parseInt(firstNumber) + parseInt(secondNumber);
-    }
-        
+    value.textContent = parseInt(firstNumber) + parseInt(secondNumber);
 };
 
 function subtract(){
-    if (firstOperand === "-"){
-        value.textContent = parseInt(firstNumber) - parseInt(secondNumber);
-    }
+    value.textContent = parseInt(firstNumber) - parseInt(secondNumber);
 };
 
 function multiply(){
-    if (firstOperand === "*"){
-        value.textContent = parseInt(firstNumber) * parseInt(secondNumber);
-    }
+    value.textContent = parseInt(firstNumber) * parseInt(secondNumber);
 };
 
 function divide(){
-    if (firstOperand === "/"){
-        value.textContent = parseInt(firstNumber) / parseInt(secondNumber);
-    }
+    if (secondNumber == 0){
+        value.textContent = "Error";
+        return;
+    }else{
+    value.textContent = parseInt(firstNumber) / parseInt(secondNumber);
+    };
 };
 
 function percent(){
-    if (firstOperand === "%"){
         value.textContent = parseInt(firstNumber) * parseInt(secondNumber) / 100;
-    }
 }
 
 function clear(){
     value.textContent = "0";
     firstNumber = 0;
     secondNumber = 0;
-    firstOperand = "";
+    firstOperator = "";
 };
 
 function result(){
-    if (firstOperand === "+"){
+    if (firstOperator === "+"){
         add();
     }
-    else if (firstOperand === "-"){
+    else if (firstOperator === "-"){
         subtract();
     }
-    else if (firstOperand === "*"){
+    else if (firstOperator === "*"){
         multiply();
     }
-    else if (firstOperand === "/"){
+    else if (firstOperator === "/"){
         divide();
-    }else if (firstOperand === "%"){
+    }else if (firstOperator === "%"){
         percent();
     }
     firstNumber = value.textContent;
     secondNumber = "";
-    firstOperand = "";
+    firstOperator = "";
 };
 

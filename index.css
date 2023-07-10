@@ -5,8 +5,8 @@
     background-color: rgb(81, 76, 76);
 }
 button {
-    width: 70px;
-    height: 70px;
+    width: 60px;
+    height: 60px;
     border: 1px solid #000;
     background-color: #fff;
     color: #000;
@@ -34,7 +34,7 @@ button {
     border: 1px solid #000;
     border-radius: 15px;
     background-color: rgb(81, 76, 76);
-    box-shadow:5px 5px 5px 5px #000;
+    box-shadow: 4px 4px 4px 4px #000;
     font: fantasy;
 }
 .display{
@@ -83,8 +83,6 @@ button {
 }
 .number:hover{
     box-shadow: 0px 2px 2px 0px #000;
-    margin-top:10px;
-    margin-bottom: 0px;
     background-color: #24eacc;
     color: #000;
 }
