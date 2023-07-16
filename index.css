@@ -95,6 +95,10 @@ button:hover{
     color: #000;
 }
 
+.GHub{
+    box-sizing: border-box;
+    font-size: medium;
+}
 p{
     font-size: 20px;
     color: #000000;

@@ -12,7 +12,6 @@ let reset = false;
 let firstNumber = 0;
 let secondNumber = 0;
 let firstOperator = "";
-let secondOperator = "";
 let resultNumber = "";
 
 clearBtn.addEventListener("click", () => {
@@ -38,8 +37,11 @@ equalBtn.addEventListener("click", () => {
     reset = true;
 });
 
+
+
 operator.forEach((operator) => {
     operator.addEventListener("click", () => {
+        multipleOperator();
         setOperator(operator);
     });
 });
@@ -66,11 +68,16 @@ function comma(){
     if (value.textContent === ""){
         value.textContent = "0.";
     }else{
-        value.textContent += ".";
         if (firstOperator !== ""){
             secondNumber += ".";
-        }else{
+            value.textContent += ".";
+        }else if (firstOperator === "" && !(value.textContent.includes("."))){
+            if (value.textContent.includes(".")){
+                return;
+            }else{
             firstNumber += ".";
+            value.textContent += ".";
+            }
         }
     };
 };
@@ -92,15 +99,15 @@ function deleteNumber(){
 };
 
 function add(){
-    value.textContent = parseInt(firstNumber) + parseInt(secondNumber);
+    value.textContent = parseFloat(firstNumber) + parseFloat(secondNumber);
 };
 
 function subtract(){
-    value.textContent = parseInt(firstNumber) - parseInt(secondNumber);
+    value.textContent = parseFloat(firstNumber) - parseFloat(secondNumber);
 };
 
 function multiply(){
-    value.textContent = parseInt(firstNumber) * parseInt(secondNumber);
+    value.textContent = parseFloat(firstNumber) * parseFloat(secondNumber);
 };
 
 function divide(){
@@ -108,12 +115,12 @@ function divide(){
         value.textContent = "Error";
         return;
     }else{
-    value.textContent = parseInt(firstNumber) / parseInt(secondNumber);
+    value.textContent = parseFloat(firstNumber) / parseFloat(secondNumber);
     };
 };
 
 function percent(){
-        value.textContent = parseInt(firstNumber) * parseInt(secondNumber) / 100;
+        value.textContent = parseFloat(firstNumber) * parseFloat(secondNumber) / 100;
 }
 
 function clear(){
@@ -142,4 +149,12 @@ function result(){
     secondNumber = "";
     firstOperator = "";
 };
+
+function multipleOperator(){
+    if (firstOperator !== ""){
+        result();
+        firstNumber = value.textContent;
+        secondNumber = "";
+    }
+}
 
