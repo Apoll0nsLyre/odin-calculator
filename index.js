@@ -13,6 +13,7 @@ let firstNumber = 0;
 let secondNumber = 0;
 let firstOperator = "";
 let resultNumber = "";
+const operators = ["+", "-", "*", "/", "%"];
 
 clearBtn.addEventListener("click", () => {
     clear();
@@ -33,24 +34,17 @@ deleteBtn.addEventListener("click", () => {
 });
 
 equalBtn.addEventListener("click", () => {
-    result();
+    result(value.textContent);
     reset = true;
 });
 
-
-
 operator.forEach((operator) => {
     operator.addEventListener("click", () => {
-        multipleOperator();
         setOperator(operator);
     });
 });
 
 function appendNumber(number){
-    if (reset === true && firstOperator === ""){
-        reset = false;
-        clear();
-    }
     if (value.textContent === "0"){
         value.textContent = "";
     }
@@ -98,31 +92,6 @@ function deleteNumber(){
     console.log(secondNumber, "second");
 };
 
-function add(){
-    value.textContent = parseFloat(firstNumber) + parseFloat(secondNumber);
-};
-
-function subtract(){
-    value.textContent = parseFloat(firstNumber) - parseFloat(secondNumber);
-};
-
-function multiply(){
-    value.textContent = parseFloat(firstNumber) * parseFloat(secondNumber);
-};
-
-function divide(){
-    if (secondNumber == 0){
-        value.textContent = "Error";
-        return;
-    }else{
-    value.textContent = parseFloat(firstNumber) / parseFloat(secondNumber);
-    };
-};
-
-function percent(){
-        value.textContent = parseFloat(firstNumber) * parseFloat(secondNumber) / 100;
-}
-
 function clear(){
     value.textContent = "0";
     firstNumber = 0;
@@ -130,31 +99,126 @@ function clear(){
     firstOperator = "";
 };
 
-function result(){
-    if (firstOperator === "+"){
-        add();
+function result(str) {
+    const operateurs = ['+', '-', '*', '/'];
+  
+    function estOperateur(caractere) {
+      return operateurs.includes(caractere);
     }
-    else if (firstOperator === "-"){
-        subtract();
+  
+    function prioriteOperateur(op) {
+      switch (op) {
+        case '+':
+        case '-':
+          return 1;
+        case '*':
+        case '/':
+          return 2;
+        default:
+          return 0;
+      }
     }
-    else if (firstOperator === "*"){
-        multiply();
+  
+    function construireArbreExpression(tokens) {
+      const pileOperateurs = [];
+      const pileOperandes = [];
+  
+      function appliquerOperation() {
+        const operateur = pileOperateurs.pop();
+        const droite = pileOperandes.pop();
+        const gauche = pileOperandes.pop();
+        pileOperandes.push({ type: 'operation', operateur, gauche, droite });
+      }
+  
+      for (let token of tokens) {
+        if (!estOperateur(token)) {
+          pileOperandes.push({ type: 'nombre', valeur: token });
+        } else {
+          while (
+            pileOperateurs.length > 0 &&
+            prioriteOperateur(pileOperateurs[pileOperateurs.length - 1]) >= prioriteOperateur(token)
+          ) {
+            appliquerOperation();
+          }
+          pileOperateurs.push(token);
+        }
+      }
+  
+      while (pileOperateurs.length > 0) {
+        appliquerOperation();
+      }
+  
+      return pileOperandes[0];
     }
-    else if (firstOperator === "/"){
-        divide();
-    }else if (firstOperator === "%"){
-        percent();
+  
+    function obtenirBlocs(arbre) {
+        const blocs = [];
+    
+        function parcourirArbre(expr) {
+          if (expr.type === 'nombre') {
+            blocs.push(expr.valeur);
+          } else {
+            parcourirArbre(expr.gauche);
+            blocs.push(expr.operateur);
+            parcourirArbre(expr.droite);
+          }
+        }
+    
+        parcourirArbre(arbre);
+        return blocs;
+        }
+  
+    function evaluerArbre(arbre) {
+      if (arbre.type === 'nombre') {
+        console.log(arbre.valeur);
+        return parseFloat(arbre.valeur);
+      } else {
+        const gauche = evaluerArbre(arbre.gauche);
+        const droite = evaluerArbre(arbre.droite);
+  
+        switch (arbre.operateur) {
+          case '+':
+            return gauche + droite;
+          case '-':
+            return gauche - droite;
+          case '*':
+            return gauche * droite;
+          case '/':
+            return gauche / droite;
+          default:
+            throw new Error('Opérateur non reconnu : ' + arbre.operateur);
+        }
+      }
     }
-    firstNumber = value.textContent;
-    secondNumber = "";
-    firstOperator = "";
-};
+  
+    const tokens = [];
+    let nombreActuel = '';
+  
+    for (let i = 0; i < str.length; i++) {
+      const caractere = str[i];
+      if (estOperateur(caractere)) {
+        if (nombreActuel !== '') {
+          tokens.push(nombreActuel);
+          nombreActuel = '';
+        }
+        tokens.push(caractere);
+      } else {
+        nombreActuel += caractere;
+      }
+    }
+  
+    if (nombreActuel !== '') {
+      tokens.push(nombreActuel);
+    }
+  
+    const arbreExpression = construireArbreExpression(tokens);
+    const blocs = obtenirBlocs(arbreExpression);
+    const resultat = evaluerArbre(arbreExpression);
+  
+    value.textContent = resultat;
+  }
 
-function multipleOperator(){
-    if (firstOperator !== ""){
-        result();
-        firstNumber = value.textContent;
-        secondNumber = "";
-    }
-}
+  
+  
+
 
